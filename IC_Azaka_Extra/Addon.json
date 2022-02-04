@@ -1,0 +1,9 @@
+{
+	"Name":"Azaka",
+	"Version": "v1.0.0",
+    "Includes" : "IC_Azaka_Component.ahk",
+    "Author" : "mikebaldi1980",
+    "Url" : "",
+    "Info" : "This AddOn will spam Azaka and other champion's ults at a set Omin number of contracts fulfilled value.",
+    "Dependencies" : {}
+}
