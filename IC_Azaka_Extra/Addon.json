@@ -1,6 +1,6 @@
 {
-	"Name":"Azaka",
-	"Version": "v1.0.0",
+    "Name":"Azaka",
+    "Version": "v1.0.0",
     "Includes" : "IC_Azaka_Component.ahk",
     "Author" : "mikebaldi1980",
     "Url" : "",
