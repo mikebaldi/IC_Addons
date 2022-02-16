@@ -1,4 +1,4 @@
-# Azaka
+# NERDs
 ## Description:
 This AddOn will launch a seaparte script that will spam NERDs ultimate until you get the desired set of three NERDs.
 
