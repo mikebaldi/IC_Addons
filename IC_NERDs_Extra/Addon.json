@@ -1,0 +1,9 @@
+{
+    "Name":"NERDs Shake the Box",
+    "Version": "v1.0.0",
+    "Includes" : "IC_NERDs_Component.ahk",
+    "Author" : "mikebaldi1980",
+    "Url" : "",
+    "Info" : "This AddOn will launch a seaparte script that will spam NERDs ultimate until you get the desired set of three NERDs.",
+    "Dependencies" : {}
+}
