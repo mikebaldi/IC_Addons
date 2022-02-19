@@ -25,7 +25,8 @@ Gui, MyWindow:Add, Text, x15 y+15, What is happening:
 Gui, MyWindow:Add, Text, x+5 vNERDs_Status w300,
 Gui, MyWindow:Add, Text, x15 y+5 vNERDs_UltKey w200,
 
-Gui, MyWindow:Show
+Gui, MyWindow:Show, x0 y0, Running NERDs...
+;Gui, MyWindow:Show
 
 #include %A_LineFile%\..\..\..\SharedFunctions\MemoryRead\EffectKeyHandlers\NerdWagonHandler.ahk
 global g_Nerds := new NerdWagonHandler
