@@ -20,7 +20,7 @@ Known Issues:
 1. Occasionally, the upgrade lists are not read correctly from memory. You will know this is the case when the Select Specialization window opens and champions you own are not present or the drop down lists to select specializations are blank. If this occurs, please make sure the game is running and reload the script.
 2. The script can click before the specialization window appears or after it is gone, resulting in a champion formation dialogue opening. This should not interfere with the script functionality.
 
-##ChangeLog:
+## ChangeLog:
 v0.0.0 February 19, 2022
 
     Beta release.
