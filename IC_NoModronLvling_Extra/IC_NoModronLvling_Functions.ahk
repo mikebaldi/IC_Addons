@@ -355,7 +355,7 @@ class IC_NML_Functions
         }
         ScreenCenterX := (g_SF.Memory.ReadScreenWidth(1) / 2)
         ScreenCenterY := (g_SF.Memory.ReadScreenHeight(1) / 2)
-        yClick := ScreenCenterY + 225
+        yClick := ScreenCenterY + 245
         ButtonWidth := 70
         ButtonSpacing := 180
         TotalWidth := (ButtonWidth * Choices) + (ButtonSpacing * (Choices - 1))
