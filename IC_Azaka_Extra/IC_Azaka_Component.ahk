@@ -97,9 +97,9 @@ class AzakaFarm
 
     __new(settings, guiData)
     {
-        this.omin := new OminContractualObligationsHandler
-        this.omin.Initialize()
-        this.checkOmin()
+        this.omin := g_SF.Memory.ActiveEffectKeyHandler.OminContractualObligationsHandler ;new OminContractualObligationsHandler
+        ;this.omin.Initialize()
+        ;this.checkOmin()
         loop, 10
         {
             if (settings.Ult[A_Index] AND A_Index < 10)
@@ -140,15 +140,15 @@ class AzakaFarm
 
     farm()
     {
-        this.checkOmin()
-        num := this.omin.GetNumContractsFufilled()
+        ;this.checkOmin()
+        num := g_SF.Memory.GenericGetValue(this.omin.numContractsFufilled) ;this.omin.GetNumContractsFufilled()
         if (this.useGUI)
             GuiControl, % this.guiName, % this.guiControlIDcont, % "Current No. Contracts Fulfilled: " . num
         if (num > this.numContracts)
         {
             while (num > this.numContracts)
             {
-                num := this.omin.GetNumContractsFufilled()
+                num := g_SF.Memory.GenericGetValue(this.omin.numContractsFufilled) ;this.omin.GetNumContractsFufilled()
                 g_SF.DirectedInput(,, this.inputs*)
                 sleep, 100
             }

@@ -1,5 +1,5 @@
 # IC_Addons
-Addons for IC Script Hub
+Addons for IC Script Hub - NERDs and No Modron Leveling are still to be updated for Auto Offset revisions. Azaka is in need of testing.
 
 ## IC_Azaka_Extra
 This AddOn will spam Azaka and other champion's ults at a set Omin number of contracts fulfilled value.
