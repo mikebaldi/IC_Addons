@@ -27,6 +27,8 @@ Gui, MyWindow:Add, Text, x15 y+5 vNERDs_UltKey w200,
 
 Gui, MyWindow:Show, x0 y0, Running NERDs...
 ;Gui, MyWindow:Show
+/*
+
 
 #include %A_LineFile%\..\..\..\SharedFunctions\MemoryRead\EffectKeyHandlers\NerdWagonHandler.ahk
 global g_Nerds := new NerdWagonHandler
@@ -35,9 +37,14 @@ if !IsObject(g_Nerds)
     msgBox, Failed to load NERDs Wagon Handler, ending script.
     ExitApp
 }
+*/
+
+
 
 #include %A_LineFile%\..\..\..\SharedFunctions\IC_SharedFunctions_Class.ahk
 global g_SF := new IC_SharedFunctions_Class
+
+#include %A_LineFile%\..\..\..\SharedFunctions\MemoryRead\IC_ActiveEffectKeyHandler_Class.ahk
 
 #include %A_LineFile%\..\..\..\SharedFunctions\IC_KeyHelper_Class.ahk
 global g_KeyMap := KeyHelper.BuildVirtualKeysMap()
@@ -60,15 +67,14 @@ loop
     Process, Exist, IdleDragons.exe
     g_SF.PID := ErrorLevel
     g_SF.Memory.OpenProcessReader()
-    g_Nerds.Initialize()
     nerdCount := 0
     if (g_SF.Hwnd AND g_SF.PID)
     {
-        if g_NERDsSettings[ g_Nerds.GetNeard0Int() ]
+        if g_NERDsSettings[ ActiveEffectKeySharedFunctions.Nerds.NerdWagonHandler.ReadNerd0() ]
             ++nerdCount
-        if g_NERDsSettings[ g_Nerds.GetNeard1Int() ]
+        if g_NERDsSettings[ ActiveEffectKeySharedFunctions.Nerds.NerdWagonHandler.ReadNerd1() ]
             ++nerdCount
-        if g_NERDsSettings[ g_Nerds.GetNeard2Int() ]
+        if g_NERDsSettings[ ActiveEffectKeySharedFunctions.Nerds.NerdWagonHandler.ReadNerd2() ]
             ++nerdCount
         GuiControl, MyWindow:, NERDs_Status, % "Trying to load the correct NERDs. Matches: " . nerdCount
         if (nerdCount >= g_NERDsSettings.nerdCount)

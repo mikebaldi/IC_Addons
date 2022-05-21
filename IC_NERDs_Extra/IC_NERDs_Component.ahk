@@ -1,5 +1,3 @@
-#include %A_LineFile%\..\..\..\SharedFunctions\MemoryRead\EffectKeyHandlers\NerdWagonHandler.ahk
-
 GUIFunctions.AddTab("NERDs")
 
 global g_NERDsSettings := g_SF.LoadObjectFromJSON( A_LineFile . "\..\Settings.json" )
@@ -17,8 +15,7 @@ loop, 6
     if (g_NERDsSettings[A_Index] == "")
         g_NERDsSettings[A_Index] := 0
     chk := g_NERDsSettings[A_Index]
-    nerd := new NerdWagonHandler
-    Gui, ICScriptHub:Add, Checkbox, vNERDs_CB%A_Index% Checked%chk% x15 y+10 gNERDs_CB_Clicked, % nerd.NerdType[A_Index]
+    Gui, ICScriptHub:Add, Checkbox, vNERDs_CB%A_Index% Checked%chk% x15 y+10 gNERDs_CB_Clicked, % ActiveEffectKeySharedFunctions.Nerds.NerdWagonHandler.NerdType[A_Index]
     Gui, ICScriptHub:Add, Text, x+5 vNERDs_CB%A_Index%_Saved w200, % chk == 1 ? "Saved value: Checked":"Saved value: Unchecked"
 }
 NERDs_CB_Clicked()
