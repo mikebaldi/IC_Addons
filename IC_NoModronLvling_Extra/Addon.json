@@ -1,8 +1,8 @@
 {
 	"Name":"No Modron Leveling",
-	"Version": "v0.0.0",
+	"Version": "v0.0.2",
     "Includes" : "IC_NoModronLvling_Component.ahk",
-    "Author" : "mikebaldi1980",
+    "Author" : "mikebaldi1980 & Antilectual",
     "Url" : "",
     "Info" : "An add on that will level and specialize champions without Modron Automation.",
     "Dependencies" : {}
