@@ -1,5 +1,3 @@
-#include %A_LineFile%\..\..\..\SharedFunctions\MemoryRead\EffectKeyHandlers\OminContractualObligationsHandler.ahk
-
 GUIFunctions.AddTab("Azaka")
 
 global g_AzakaSettings := g_SF.LoadObjectFromJSON( A_LineFile . "\..\Settings.json" )
@@ -97,9 +95,7 @@ class AzakaFarm
 
     __new(settings, guiData)
     {
-        this.omin := new OminContractualObligationsHandler
-        this.omin.Initialize()
-        this.checkOmin()
+        this.omin := g_SF.Memory.ActiveEffectKeyHandler.OminContractualObligationsHandler ;new OminContractualObligationsHandler
         loop, 10
         {
             if (settings.Ult[A_Index] AND A_Index < 10)
@@ -140,29 +136,20 @@ class AzakaFarm
 
     farm()
     {
-        this.checkOmin()
-        num := this.omin.GetNumContractsFufilled()
+        g_SF.Memory.ActiveEffectKeyHandler.Refresh()
+        num := ActiveEffectKeySharedFunctions.Omin.OminContractualObligationsHandler.ReadNumContractsFulfilled()
         if (this.useGUI)
             GuiControl, % this.guiName, % this.guiControlIDcont, % "Current No. Contracts Fulfilled: " . num
         if (num > this.numContracts)
         {
             while (num > this.numContracts)
             {
-                num := this.omin.GetNumContractsFufilled()
+                num := ActiveEffectKeySharedFunctions.Omin.OminContractualObligationsHandler.ReadNumContractsFulfilled()
                 g_SF.DirectedInput(,, this.inputs*)
                 sleep, 100
             }
             return true
         }
         return false
-    }
-
-    checkOmin()
-    {
-        if !(this.omin.IsBaseAddressCorrect())
-        {
-            msgbox, % "Omin's CO Handler failed to load.`nBase Address: " . this.omin.BaseAddress
-            return
-        }
     }
 }

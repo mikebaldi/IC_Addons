@@ -21,6 +21,10 @@ Known Issues:
 2. The script can click before the specialization window appears or after it is gone, resulting in a champion formation dialogue opening. This should not interfere with the script functionality.
 
 ## ChangeLog:
+v0.0.2, 5/21/22
+
+    Update to Auto Offsets v2 Script Hub. Maybe.
+    
 v0.0.1 March 12, 2022
 
     Update for changed specialization dialogs.

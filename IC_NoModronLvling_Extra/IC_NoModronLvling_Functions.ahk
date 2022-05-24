@@ -14,12 +14,13 @@ class IC_NML_Functions
                 arrayOut[v] := {}
                 arrayOut[v].fKey := "{F" . g_SF.Memory.ReadChampSeatByID(v) . "}"
             }
-            upgradeCount := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered._size.GetGameObjectFromListValues(v - 1))
+            upgradeCount := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.gameInstances.Controller.UserData.HeroHandler.heroes.allUpgradesOrdered.size.GetGameObjectFromListValues(0, v - 1))
             upgIndex := 0
             ;iterate through every upgrade for that hero
             loop %upgradeCount%
             {
-                requiredLvl := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered.List.RequiredLevel.GetGameObjectFromListValues(v - 1, upgIndex))
+                orderedUpgradesObject := g_SF.Memory.GetHeroOrderedUpgrade(v-1, upgIndex)
+                requiredLvl := g_SF.Memory.GenericGetValue(orderedUpgradesObject.requiredLvl.GetGameObjectFromListValues(0))
                 ;some upgrades with required level of 9999
                 if (requiredLvl < 9999)
                     arrayOut[v].maxLvl := Max(requiredLvl, arrayOut[v].maxLvl)
@@ -98,7 +99,7 @@ class IC_NML_Functions
         defines := {}
         g_SF.Memory.OpenProcessReader()
         ;iterate through every hero in memory
-        heroCount := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList_size)
+        heroCount := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.gameInstances.Controller.UserData.HeroHandler.heroes.size.GetGameObjectFromListValues(0))
         if (heroCount < 100)
             msgbox, "There may have been an error loading data. Reloading the script may fix the error. Error: Unexpected heroCount"
         champID := 0
@@ -106,29 +107,33 @@ class IC_NML_Functions
         {
             ++champID
             ;only include owned heroes
-            isOwned := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.Owned.GetGameObjectFromListValues(champID - 1))
+            isOwned := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.gameInstances.Controller.UserData.HeroHandler.heroes.Owned.GetGameObjectFromListValues(0, champID - 1))
             if !isOwned
                 Continue
             name := g_SF.Memory.ReadChampNameByID(champID)
             seat := g_SF.Memory.ReadChampSeatByID(champID)
             defines[champID] := new IC_NML_Functions.HeroDefine(champID, name, seat)
-            upgradeCount := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered._size.GetGameObjectFromListValues(champID - 1))
+            upgradesObject := g_SF.Memory.GameManager.Game.gameInstances.Controller.UserData.HeroHandler.heroes.allUpgradesOrdered.List.GetFullGameObjectFromListOrDictValues("List", 0, champID - 1)
+            upgradesObject := upgradesObject.GetFullGameObjectFromListOrDictValues("Dict", 0)
+            upgradesObject.ValueType := "List"
+            upgradeCount := g_SF.Memory.GenericGetValue(upgradesObject.size)
             upgIndex := 0
             ;iterate through every upgrade for that hero
             loop %upgradeCount%
             {
-                requiredLvl := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered.List.RequiredLevel.GetGameObjectFromListValues(champID - 1, upgIndex))
+                orderedUpgrade := g_SF.Memory.GetHeroOrderedUpgrade(champID-1, upgIndex)
+                requiredLvl := g_SF.Memory.GenericGetValue(orderedUpgrade.RequiredLevel)
                 ;some upgrades with required level of 9999
                 if (requiredLvl < 9999)
                     defines[champID].MaxLvl := Max(requiredLvl, defines[champID].MaxLvl)
                 ;look to see if upgrade define has spec graphic id, easiest way to know it is a spec upgrade and appears to work 100% so far.
                 ;trying to use upgrade type field was just wrong in a lot of cases. the type spec was commonly overrided by stuff like upgrade ability type.
-                isSpec := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered.List.SpecializationGraphic.GetGameObjectFromListValues(champID - 1, upgIndex))
+                isSpec := g_SF.Memory.GenericGetValue(orderedUpgrade.SpecializationGraphic)
                 if isSpec
                 {
-                    upgradeID := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered.List.ID.GetGameObjectFromListValues(champID - 1, upgIndex))
-                    requiredUpgradeID := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered.List.RequiredUpgradeID.GetGameObjectFromListValues(champID - 1, upgIndex))
-                    specName := g_SF.Memory.GenericGetValue(g_SF.Memory.GameManager.Game.GameInstance.Controller.UserData.HeroHandler.HeroList.allUpgradesOrdered.List.SpecializationName.GetGameObjectFromListValues(champID - 1, upgIndex))
+                    upgradeID := g_SF.Memory.GenericGetValue(orderedUpgrade.ID)
+                    requiredUpgradeID := g_SF.Memory.GenericGetValue(orderedUpgrade.RequiredUpgradeID)
+                    specName := g_SF.Memory.GenericGetValue(orderedUpgrade.SpecializationName)
                     defines[champID].SpecDefines.AddSpec(upgradeID, requiredLvl, requiredUpgradeID, specName)
                 }
                 ++upgIndex
