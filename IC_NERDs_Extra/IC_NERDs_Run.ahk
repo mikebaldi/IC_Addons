@@ -51,6 +51,8 @@ global g_KeyMap := KeyHelper.BuildVirtualKeysMap()
 
 #include %A_LineFile%\..\..\..\SharedFunctions\json.ahk
 global g_NERDsSettings := g_SF.LoadObjectFromJSON( A_LineFile . "\..\Settings.json" )
+
+global g_UserSettings := g_SF.LoadObjectFromJSON( A_LineFile . "\..\..\..\Settings.json" )
 if !IsObject(g_NERDsSettings)
 {
     msgBox, Failed to load settings, ending script.
@@ -63,8 +65,9 @@ if (g_NERDsSettings.nerdCount > 3)
 loop
 {
     ;initialize shared functions for inputs and memory reads, every loop incase game closes/crashes
-    g_SF.Hwnd := WinExist("ahk_exe IdleDragons.exe")
-    Process, Exist, IdleDragons.exe
+    g_SF.Hwnd := WinExist("ahk_exe " . g_UserSettings[ "ExeName" ])
+    existingProcessID := g_userSettings[ "ExeName"]
+    Process, Exist, %existingProcessID%
     g_SF.PID := ErrorLevel
     g_SF.Memory.OpenProcessReader()
     nerdCount := 0

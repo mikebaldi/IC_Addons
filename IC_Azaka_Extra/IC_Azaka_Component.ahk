@@ -69,7 +69,7 @@ Azaka_Run()
 {
     GuiControl, ICScriptHub:, Azaka_Running, Azaka farm is running.
     ;initialize shared functions for memory reads and directed inputs
-    g_SF.Hwnd := WinExist("ahk_exe IdleDragons.exe")
+    g_SF.Hwnd := WinExist("ahk_exe " . g_UserSettings[ "ExeName" ])
     g_SF.Memory.OpenProcessReader()
     ;create object for azaka class to update gui
     guiData := {}
