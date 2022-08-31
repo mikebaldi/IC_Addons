@@ -128,7 +128,7 @@ class IC_NML_Functions
                     defines[champID].MaxLvl := Max(requiredLvl, defines[champID].MaxLvl)
                 ;look to see if upgrade define has spec graphic id, easiest way to know it is a spec upgrade and appears to work 100% so far.
                 ;trying to use upgrade type field was just wrong in a lot of cases. the type spec was commonly overrided by stuff like upgrade ability type.
-                isSpec := g_SF.Memory.GenericGetValue(orderedUpgrade.SpecializationGraphic)
+                isSpec := g_SF.Memory.GenericGetValue(orderedUpgrade.SpecializationName)
                 if isSpec
                 {
                     upgradeID := g_SF.Memory.GenericGetValue(orderedUpgrade.ID)

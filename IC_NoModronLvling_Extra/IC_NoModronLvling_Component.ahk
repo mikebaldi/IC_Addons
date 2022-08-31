@@ -52,7 +52,7 @@ NML_LevelAndSpec()
         msgbox, Specialization settings not found, click Select/Create Spec. Settings prior to running this script.
         return
     }
-    g_SF.Hwnd := WinExist("ahk_exe IdleDragons.exe")
+    g_SF.Hwnd := WinExist("ahk_exe " . g_UserSettings[ "ExeName" ])
     g_SF.Memory.OpenProcessReader()
     lvlObj := new IC_NML_Functions
     Gui, ICScriptHub:Submit, NoHide
