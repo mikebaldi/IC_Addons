@@ -1,6 +1,6 @@
 {
 	"Name":"No Modron Leveling",
-	"Version": "v0.0.2",
+	"Version": "v0.0.3",
     "Includes" : "IC_NoModronLvling_Component.ahk",
     "Author" : "mikebaldi1980 & Antilectual",
     "Url" : "",
