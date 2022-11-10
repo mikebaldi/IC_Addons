@@ -1,0 +1,9 @@
+{
+	"Name":"Area Handler",
+	"Version": "v1.0.0",
+    "Includes" : "IC_AreaHandler_Component.ahk",
+    "Author" : "mikebaldi1980",
+    "Url" : "",
+    "Info" : "This Addon uses memory writes to make all transitions quick, all monsters basic (melee if possible), and enable skipping bosses on variants.",
+    "Dependencies" : {}
+}
