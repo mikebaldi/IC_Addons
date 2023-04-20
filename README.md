@@ -1,3 +1,5 @@
+# This repo is no longer being maintained.
+
 # IC_Addons
 Addons for IC Script Hub - NERDs and No Modron Leveling are still to be updated for Auto Offset revisions. Azaka is in need of testing.
 
